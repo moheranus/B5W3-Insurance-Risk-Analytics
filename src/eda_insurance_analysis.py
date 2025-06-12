@@ -28,7 +28,7 @@ except FileNotFoundError:
     print("Error: 'data/MachineLearningRating_v3.txt' not found.")
     exit(1)
 
-# Sample dataset for visualizations to improve performance
+# Sample dataset for visualizations
 SAMPLE_SIZE = 10000
 if len(df) > SAMPLE_SIZE:
     df_sample = df.sample(n=SAMPLE_SIZE, random_state=42)
@@ -159,13 +159,14 @@ def temporal_trends(df):
             })
             monthly_trends.columns = ['Avg_Claims', 'Claim_Count', 'Avg_Premium']
             plt.figure(figsize=(12, 6))
-            plt.plot(monthly_trends.index.astype(str), monthly_trends['Avg_Claims'], label='Average Claims')
-            plt.plot(monthly_trends.index.astype(str), monthly_trends['Avg_Premium'], label='Average Premium')
+            plt.plot(monthly_trends.index.to_timestamp(), monthly_trends['Avg_Claims'], label='Average Claims')
+            plt.plot(monthly_trends.index.to_timestamp(), monthly_trends['Avg_Premium'], label='Average Premium')
             plt.title('Monthly Trends in Claims and Premiums')
             plt.xlabel('Month')
             plt.ylabel('Amount')
             plt.legend()
             plt.xticks(rotation=45)
+            plt.tight_layout()
             plt.savefig('visualizations/monthly_trends.png')
             plt.close()
         logging.info("Temporal trends analysis completed.")
@@ -215,11 +216,11 @@ def main():
     logging.info("Starting main EDA execution")
     data_summarization(df)
     data_quality_assessment(df)
-    univariate_analysis(df_sample)  # Use sampled data for visualizations
-    bivariate_analysis(df_sample)   # Use sampled data
-    temporal_trends(df)             # Use full data for trends
-    outlier_detection(df_sample)    # Use sampled data
-    vehicle_analysis(df_sample)     # Use sampled data
+    univariate_analysis(df_sample)
+    bivariate_analysis(df_sample)
+    temporal_trends(df)
+    outlier_detection(df_sample)
+    vehicle_analysis(df_sample)
     print("EDA completed. Visualizations saved in visualizations/ folder.")
     logging.info("EDA completed successfully")
 
