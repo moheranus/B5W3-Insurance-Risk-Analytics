@@ -1,0 +1,8 @@
+Claim Severity Model Results:
+Linear Regression: RMSE=39531.58, R-squared=0.0283
+Random Forest: RMSE=8280.56, R-squared=0.9574
+XGBoost: RMSE=9973.59, R-squared=0.9381
+
+Claim Probability Model Results:
+Random Forest: Accuracy=0.9361, Precision=0.0164, Recall=0.3710, F1-score=0.0314
+XGBoost: Accuracy=0.8646, Precision=0.0164, Recall=0.8047, F1-score=0.0321
